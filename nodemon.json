@@ -1,0 +1,9 @@
+{
+    "signal": "SIGHUP",
+    "watch": ["config", "server", ".env"],
+    "ext": "ts json",
+    "execMap": {
+      "ts": "NODE_OPTIONS=--inspect ts-node --project tsconfig.json"
+    }
+  }
+  
