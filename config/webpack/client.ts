@@ -131,10 +131,9 @@ const development: webpack.Configuration = {
     hotUpdateMainFilename: 'assets/[hash].hot-update.json'
   },
   entry: {
-    app: ['webpack-hot-middleware/client?name=client&noInfo=false&timeout=2000', entry.server]
+    app: ['@babel/polyfill', entry.server],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new BundleAnalyzerPlugin({
       openAnalyzer: false
     })

@@ -1,1 +1,5 @@
-export const Resolvers = [];
+import { EventsResolvers } from './events';
+
+export const Resolvers = [
+  EventsResolvers,
+];

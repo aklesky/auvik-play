@@ -1,18 +1,16 @@
 import cors from '@koa/cors';
+import { port } from 'config/env';
+import { client, js } from 'config/paths';
 import Koa from 'koa';
 import compress from 'koa-compress';
 import mount from 'koa-mount';
 import serve from 'koa-static';
-
-import { port } from 'config/env';
-import { client, js } from 'config/paths';
 import { staticWebpack, withApollo } from '../middlewares';
 import { logger } from '../utils/logger';
 import { router } from './router';
 
 export const createServer = (): { app: Koa; apollo: any } => {
   const app = new Koa();
-
   const apollo = withApollo()(app);
 
   app
@@ -27,29 +25,33 @@ export const createServer = (): { app: Koa; apollo: any } => {
 };
 
 export const appWithWebpackMiddleware = async middleware => {
-  const { app } = createServer();
+  const { app, apollo } = createServer();
   app.use(await middleware);
   router.get('*', staticWebpack);
 
   app.use(router.routes());
 
-  app.listen(port, () => {
+  const server = app.listen(port, () => {
     logger.info(`listening to port ${port}`);
   });
+
+  apollo.installSubscriptionHandlers(server);
 
   return app;
 };
 
 export const appWithServerSideRendering = () => {
-  const { app } = createServer();
+  const { app, apollo } = createServer();
 
   router.get('/', () => ({}));
 
   app.use(router.routes());
   app.use(compress());
 
-  app.listen(port, () => {
+  const server = app.listen(port, () => {
     logger.info(`listening to port ${port}`);
   });
+  apollo.installSubscriptionHandlers(server);
+
   return app;
 };

@@ -12,9 +12,10 @@ const schema = makeExecutableSchema({
 export const withApollo = () => (app: Koa) => {
   const server = new ApolloServer({
     schema,
-    playground: isProduction,
-    introspection: isProduction
+    playground: !isProduction,
+    introspection: !isProduction
   });
+
 
   server.applyMiddleware({ app });
   return server;
