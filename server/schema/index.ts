@@ -7,7 +7,7 @@ const queries = gql`
   }
 
   type AppSubscription {
-    Meetups: Meetup
+    Meetups(channel: String): Meetup
   }
 `;
 

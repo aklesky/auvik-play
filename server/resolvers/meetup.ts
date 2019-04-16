@@ -1,22 +1,18 @@
-import { PubSub } from 'apollo-server-koa';
-import { Messages } from './messages';
-export const pubsub = new PubSub();
-
-
+import { Messages, pubsub } from 'server/data/subscription';
 
 export const MeetupResolvers = {
   AppQuery: {
     Meetups: () => {
       return {
-        rsvp_id: new Date().getTime(),
+        rsvp_id: new Date().getTime()
       };
     }
   },
   AppSubscription: {
     Meetups: {
-      subscribe: () => {
-        return pubsub.asyncIterator([Messages.push]);
-      }
+      subscribe: (_, { channel }) => {
+        return pubsub.asyncIterator([channel || Messages.push]);
+      },
     }
   }
 };

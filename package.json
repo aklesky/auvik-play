@@ -5,9 +5,10 @@
   "scripts": {
     "build": "ts-node -r tsconfig-paths/register ./server/build.ts",
     "start": "node dist/server/server.js",
-    "lint": "tslint --project tsconfig.json",
+    "lint": "tslint --project tsconfig.lint.json",
     "dev": "nodemon --verbose -r tsconfig-paths/register ./server/index.ts",
-    "test": "TS_NODE_PROJECT='tsconfig.test.json' mocha --inspect --watch server/**/*.spec.ts src/**/*.spec.ts"
+    "test": "TS_NODE_PROJECT='tsconfig.test.json' mocha server/**/*.spec.ts src/**/*.spec.ts",
+    "test:watch": "TS_NODE_PROJECT='tsconfig.test.json' mocha --watch server/**/*.spec.ts src/**/*.spec.ts"
   },
   "main": "dist/server/server.js",
   "author": {
@@ -85,6 +86,7 @@
     "apollo-server-koa": "^2.4.8",
     "dotenv": "^7.0.0",
     "graphql": "^14.2.1",
+    "graphql-tag": "2.10.1",
     "graphql-tools": "^4.0.4",
     "ioredis": "^4.9.0",
     "isomorphic-unfetch": "^3.0.0",

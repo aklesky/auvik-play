@@ -1,20 +1,20 @@
-import { should } from 'chai';
-import { split } from 'apollo-link';
-import { createTestClient } from 'apollo-server-testing';
-import { WebSocketLink } from 'apollo-link-ws';
-import { HttpLink } from 'apollo-link-http';
-import { createServer } from 'server/setup/koa';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import ApolloClient from 'apollo-client';
-import { logger } from 'server/utils/logger';
+import { split } from 'apollo-link';
+import { HttpLink } from 'apollo-link-http';
+import { WebSocketLink } from 'apollo-link-ws';
+import { ApolloServerBase } from 'apollo-server-core';
 import { gql } from 'apollo-server-koa';
+import { createTestClient } from 'apollo-server-testing';
 import { getMainDefinition } from 'apollo-utilities';
+import { should } from 'chai';
+import { hostname, port } from 'config/env';
+import fetch from 'isomorphic-unfetch';
+import { pubsub } from 'server/data/subscription';
+import { createServer } from 'server/setup/koa';
+import { logger } from 'server/utils/logger';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import ws from 'ws';
-import fetch from 'isomorphic-unfetch';
-import { port, hostname } from 'config/env';
-import { Messages } from 'server/resolvers/messages';
-import { pubsub } from 'server/resolvers/meetup';
 
 if (!(process as any).browser) {
   (global as any).fetch = fetch;
@@ -23,7 +23,7 @@ should();
 
 describe('Apollo Server Suite', () => {
   let server = null;
-  let instance = null;
+  let instance: ApolloServerBase = null;
   let client: ApolloClient<any> = null;
   let subscriptionClient = null;
   let defaultClient = null;
@@ -31,10 +31,10 @@ describe('Apollo Server Suite', () => {
 
   before(() => {
     const { app, apollo } = createServer();
-
     server = app.listen(port, () => {
       logger.info(`server is runninng on ${port}`);
     });
+
     apollo.installSubscriptionHandlers(server);
     instance = apollo;
     subscriptionClient = new WebSocketLink(
@@ -72,6 +72,7 @@ describe('Apollo Server Suite', () => {
 
   it('Apollo Query: Meetups should have a property rsvp_id', async () => {
     const { query } = createTestClient(instance);
+
     const response = await query({
       query: gql`
         {
@@ -90,17 +91,21 @@ describe('Apollo Server Suite', () => {
 
   it('Apollo Query: Meetups subscription should recieve an object with a property rsvp_id', done => {
     setTimeout(() => {
-      pubsub.publish(Messages.push, { Meetups: { rsvp_id: 22 } });
-    }, 2000);
+      pubsub.publish('test', { Meetups: { rsvp_id: 22 } });
+    }, 1000);
+
     const subscription = client
       .subscribe({
         query: gql`
-          subscription {
-            Meetups {
+          subscription getMeetups($channel: String) {
+            Meetups(channel: $channel) {
               rsvp_id
             }
           }
-        `
+        `,
+        variables: {
+          channel: 'test'
+        }
       })
       .subscribe(response => {
         subscription.unsubscribe();
@@ -110,7 +115,6 @@ describe('Apollo Server Suite', () => {
           .that.has.property('Meetups')
           .that.has.property('rsvp_id')
           .and.to.be.equal('22');
-
         done();
       });
   });
