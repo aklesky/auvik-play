@@ -3,6 +3,6 @@
     "watch": ["config", "server", ".env"],
     "ext": "ts json",
     "execMap": {
-      "ts": "ts-node --project tsconfig.json"
+      "ts": "ts-node --files --project tsconfig.json"
     }
   }
