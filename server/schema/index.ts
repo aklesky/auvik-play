@@ -1,13 +1,13 @@
 import { gql } from 'apollo-server-koa';
-import { events } from './events';
+import meetup from './meetup';
 
 const queries = gql`
   type AppQuery {
-    getEvents: Events
+    Meetups: Meetup
   }
 
   type AppSubscription {
-    Events: Events
+    Meetups: Meetup
   }
 `;
 
@@ -20,4 +20,4 @@ const schema = gql`
 
 export const Schema = [schema, queries];
 
-export const Types = [events];
+export const Types = [meetup];

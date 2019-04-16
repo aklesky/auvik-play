@@ -1,0 +1,4 @@
+--require ts-node/register
+--require tsconfig-paths/register
+--timeout 15000
+--recursive
