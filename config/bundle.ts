@@ -11,10 +11,10 @@ export const bundle = {
     publicPath: join(publicPath, 'assets', 'fonts'),
     destination: join('assets', 'fonts')
   },
-  serviceWorker: join('assets', 'sw.js'),
-  assetsManifest: join('assets', 'assets-manifest.json'),
-  manifest: join('assets', 'manifest.[hash].json'),
-  precacheManifest: join('assets', 'precache-manifest.[manifestHash].js'),
-  swCore: join(publicPath, 'assets', 'sw-core.js'),
+  serviceWorker: join('assets', 'js', 'sw.js'),
+  assetsManifest: join('assets', 'js', 'assets-manifest.json'),
+  manifest: join('assets', 'js', 'manifest.[hash].json'),
+  precacheManifest: join('assets', 'js', 'precache-manifest.[manifestHash].js'),
+  swCore: join(publicPath, 'assets', 'js', 'sw-core.js'),
   icon: join(media, 'bundle.png'),
 };

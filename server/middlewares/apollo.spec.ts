@@ -16,8 +16,8 @@ import { logger } from 'server/utils/logger';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import ws from 'ws';
 
-if (!(process as any).browser) {
-  (global as any).fetch = fetch;
+if (!process.browser) {
+  global.fetch = fetch;
 }
 should();
 
