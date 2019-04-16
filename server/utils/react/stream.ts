@@ -33,7 +33,7 @@ class View extends Readable {
     const sheet = new ServerStyleSheet();
     const { staticApp } = require('@/entries/server');
 
-    const apollo = client((process as any).browser);
+    const apollo = client(process.browser);
     const app = staticApp(apollo, this.context.url);
 
     const jsx = sheet.collectStyles(app);

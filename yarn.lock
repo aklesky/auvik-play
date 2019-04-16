@@ -1243,6 +1243,11 @@
     "@types/memory-fs" "*"
     "@types/webpack" "*"
 
+"@types/webpack-env@^1.13.9":
+  version "1.13.9"
+  resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.13.9.tgz#a67287861c928ebf4159a908d1fb1a2a34d4097a"
+  integrity sha512-p8zp5xqkly3g4cCmo2mKOHI9+Z/kObmDj0BmjbDDJQlgDTiEGTbm17MEwTAusV6XceCy+bNw9q/ZHXHyKo3zkg==
+
 "@types/webpack-hot-client@*":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/webpack-hot-client/-/webpack-hot-client-4.0.0.tgz#8dc631153a0ae68de202f2e0e4b5b58527e41467"

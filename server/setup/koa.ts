@@ -5,7 +5,7 @@ import Koa from 'koa';
 import compress from 'koa-compress';
 import mount from 'koa-mount';
 import serve from 'koa-static';
-import { staticWebpack, withApollo, useServerSideRendering } from 'server/middlewares';
+import { staticWebpack, useServerSideRendering, withApollo } from 'server/middlewares';
 import { logger } from 'server/utils/logger';
 import { router } from './router';
 

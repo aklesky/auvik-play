@@ -1,6 +1,7 @@
+import { IResponsive } from '@/interfaces/IResponsive';
 import { css } from './styled';
 
-export const responsive = css`
+export const responsive = css<IResponsive>`
   width: 100%;
   ${props =>
     Object.keys(props)

@@ -1,1 +1,6 @@
-export const helmetContext = {};
+export const helmetContext = {
+  helmet: {
+    title: null,
+    meta: null,
+  },
+};

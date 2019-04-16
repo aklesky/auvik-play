@@ -3,6 +3,7 @@ import { theme } from '@/theme';
 import { client } from '@/utils/apollo';
 import fonts from '@/utils/fonts';
 import sw from '@/utils/sw';
+import { ApolloClient } from 'apollo-client';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
@@ -10,7 +11,7 @@ import { BrowserRouter } from 'react-router-dom';
 sw();
 fonts();
 
-const renderApp = apollo => {
+const renderApp = (apollo: ApolloClient<any>) => {
   const Root = (
     <BrowserRouter>
       <Universal client={apollo} theme={theme} />
@@ -24,10 +25,10 @@ const renderApp = apollo => {
   }
 };
 
-renderApp(client((process as any).browser));
+renderApp(client(process.browser));
 
-if ((module as any).hot) {
-  (module as any).hot.accept('@/app', () => {
-    renderApp(client((process as any).browser));
+if (module.hot) {
+  module.hot.accept('@/app', () => {
+    renderApp(client(process.browser));
   });
 }

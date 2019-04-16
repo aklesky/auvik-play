@@ -1,14 +1,18 @@
 import GlobalStyles from '@/theme/globalStyle';
+import { helmetContext } from '@/utils/helmet';
+import { ApolloClient } from 'apollo-client';
 import { description, name } from 'i18n/en.json';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Route, Switch } from 'react-router';
 import { ThemeProvider } from 'styled-components';
+import { ITheme } from './interfaces/ITheme';
 
-import { helmetContext } from '@/utils/helmet';
-
-export const Universal = props => {
+export const Universal: React.SFC<{
+  theme: ITheme;
+  client: ApolloClient<any>;
+}> = props => {
   const { theme, client } = props;
   return (
     <HelmetProvider context={helmetContext}>
