@@ -1,6 +1,6 @@
-import { IVenue } from "./IVenue";
-import { IEvent } from "./IEvent";
-import { IGroup } from "./IGroup";
+import { IEvent } from './IEvent';
+import { IGroup } from './IGroup';
+import { IVenue } from './IVenue';
 
 export interface IMeetup {
   rsvp_id: number;

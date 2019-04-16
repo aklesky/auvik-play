@@ -1,57 +1,7 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "allowJs": true,
-    "allowUnusedLabels": true,
-    "baseUrl": ".",
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "jsx": "react",
-    "lib": [
-      "dom",
-      "es2015",
-      "esnext"
-    ],
-    "module": "commonjs",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "outDir": "dist",
-    "skipLibCheck": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./typings/"
-    ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "server/*": [
-        "server/*"
-      ],
-      "config/*": [
-        "config/*"
-      ],
-      "i18n/*": [
-        "i18n/*"
-      ],
-      "static/*": [
-        "static/*"
-      ],
-      "@dist/*": [
-        "dist/*"
-      ],
-      "@theme/*": [
-        "src/app/theme/*"
-      ]
-    },
-    "removeComments": true,
-    "sourceMap": true,
-    "strict": false,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "target": "esnext",
-  },
-  "exclude": [
-    "dist",
-  ]
+  }
 }

@@ -53,5 +53,7 @@
   },
   "exclude": [
     "dist",
+    "**/*.spec.ts",
+    "./lib"
   ]
 }

@@ -1,7 +1,7 @@
-import ws from 'ws';
 import { logger } from 'server/utils/logger';
+import ws from 'ws';
 
-export const initMeetupConnection = (url?: string, since?: number): ws => {
+export const initMeetupConnection = (url?: string, _since?: number): ws => {
   try {
     const meetup = new ws(url);
     meetup.onopen = () => {
@@ -11,9 +11,9 @@ export const initMeetupConnection = (url?: string, since?: number): ws => {
       logger.error(e.message);
     };
 
-    meetup.onclose = (state) => {
+    meetup.onclose = state => {
       logger.info(`Connection close state: code: ${state.code}, was clean: ${state.wasClean}`);
-    }
+    };
     return meetup;
   } catch (e) {
     logger.error(e.message);

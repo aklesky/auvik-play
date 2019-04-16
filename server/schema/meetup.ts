@@ -1,8 +1,7 @@
-import { gql } from 'apollo-server-koa'
-import group from './group';
+import { gql } from 'apollo-server-koa';
 import { event } from './event';
+import group from './group';
 import { venue } from './venue';
-
 
 export const meetup = gql`
   type Meetup {

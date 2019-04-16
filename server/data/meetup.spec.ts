@@ -1,7 +1,8 @@
 import { should } from 'chai';
 import { config } from 'dotenv';
 import { initMeetupConnection } from './meetup';
-import { IMeetup } from 'server/interfaces/IMeetup';
+import { IMeetup } from '../interfaces/IMeetup';
+
 config();
 
 should();

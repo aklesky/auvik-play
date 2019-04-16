@@ -5,6 +5,7 @@
   "scripts": {
     "build": "ts-node -r tsconfig-paths/register ./server/build.ts",
     "start": "node dist/server/server.js",
+    "lint": "tslint --project tsconfig.json",
     "dev": "nodemon --verbose -r tsconfig-paths/register ./server/index.ts",
     "test": "TS_NODE_PROJECT='tsconfig.test.json' mocha --inspect --watch server/**/*.spec.ts src/**/*.spec.ts"
   },
@@ -77,6 +78,10 @@
   "dependencies": {
     "@babel/runtime": "^7.4.3",
     "@koa/cors": "^3.0.0",
+    "apollo-cache-inmemory": "1.5.1",
+    "apollo-client": "2.5.1",
+    "apollo-link-http": "1.5.14",
+    "apollo-link-ws": "1.0.17",
     "apollo-server-koa": "^2.4.8",
     "dotenv": "^7.0.0",
     "graphql": "^14.2.1",
@@ -93,7 +98,7 @@
     "react-dom": "^16.8.6",
     "react-helmet-async": "^1.0.2",
     "styled-components": "^4.2.0",
-    "subscriptions-transport-ws": "^0.9.16",
+    "subscriptions-transport-ws": "0.9.16",
     "webfontloader": "^1.6.28",
     "winston": "^3.2.1"
   }
