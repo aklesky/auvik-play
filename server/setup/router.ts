@@ -1,7 +1,7 @@
+import { assets, js } from 'config/paths';
+import fs from 'fs';
 import KoaRouter from 'koa-router';
 import path from 'path';
-import fs from 'fs';
-import { js, client, assets } from 'config/paths';
 
 export const router = new KoaRouter();
 router.get('/sw.js', async ctx => {
