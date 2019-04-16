@@ -28,7 +28,7 @@ export const common: webpack.Configuration = {
                       '@babel/preset-env',
                       {
                         modules: false,
-                        useBuiltIns: 'entry'
+                        useBuiltIns: false,
                       }
                     ],
                     '@babel/preset-react',

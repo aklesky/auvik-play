@@ -131,7 +131,7 @@ const development: webpack.Configuration = {
     hotUpdateMainFilename: 'assets/[hash].hot-update.json'
   },
   entry: {
-    app: ['@babel/polyfill', entry.server],
+    app: ['@babel/polyfill', entry.client],
   },
   plugins: [
     new BundleAnalyzerPlugin({
@@ -143,7 +143,7 @@ const development: webpack.Configuration = {
 const production: webpack.Configuration = {
   devtool: false,
   entry: {
-    app: entry.client
+    app: ['@babel/polyfill', entry.client]
   },
   output: {
     chunkFilename: 'assets/js/[name].[chunkhash].js',

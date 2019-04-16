@@ -23,7 +23,7 @@ export const log = {
 };
 
 export const source = join(root, 'src');
-export const entries = join(source, 'entires');
+export const entries = join(source, 'entries');
 
 export const staticFiles = join(root, 'static');
 export const media = join(staticFiles, 'media');
