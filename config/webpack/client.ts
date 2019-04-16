@@ -5,7 +5,16 @@ import CompressionPlugin from 'compression-webpack-plugin';
 import { bundle } from 'config/bundle';
 import { isProduction } from 'config/env';
 import { files } from 'config/files';
-import { assets, client, entry, js, lib, publicPath, staticFiles, template } from 'config/paths';
+import {
+  assets,
+  client,
+  entry,
+  publicPath,
+  staticFiles,
+  swCore,
+  template,
+  workBoxConfig
+} from 'config/paths';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import Critters from 'critters-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -110,8 +119,8 @@ const base: webpack.Configuration = {
         cache: isProduction
       },
       {
-        from: lib,
-        to: js
+        from: workBoxConfig,
+        to: swCore
       }
     ]),
     new webpack.DefinePlugin({
@@ -131,7 +140,7 @@ const development: webpack.Configuration = {
     hotUpdateMainFilename: 'assets/[hash].hot-update.json'
   },
   entry: {
-    app: ['@babel/polyfill', entry.client],
+    app: ['@babel/polyfill', entry.client]
   },
   plugins: [
     new BundleAnalyzerPlugin({

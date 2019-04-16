@@ -1,7 +1,7 @@
+import { IMeetup } from '@/interfaces/IMeetup';
 import { should } from 'chai';
 import { config } from 'dotenv';
-import { IMeetup } from 'server/interfaces/IMeetup';
-import { initMeetupConnection, getMeetupClient } from './meetup';
+import { getMeetupClient, initMeetupConnection } from './meetup';
 
 config();
 
@@ -17,6 +17,7 @@ describe('Meetup Stream Suite', () => {
   });
 
   it('Stream URL should be defined', () => {
+    // tslint:disable-next-line: no-unused-expression
     process.env.MEETUP_STREAM_URL.should.not.be.undefined;
   });
   it('initMeetupConnection should be a function', () => {

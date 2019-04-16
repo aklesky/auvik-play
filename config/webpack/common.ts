@@ -1,6 +1,7 @@
 import { isProduction } from 'config/env';
 import { files } from 'config/files';
 import { modulePackage, node_modules, publicPath, root, tsConfig } from 'config/paths';
+import DotEnv from 'dotenv-webpack';
 import TerserPlugin from 'terser-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import webpack from 'webpack';
@@ -22,13 +23,16 @@ export const common: webpack.Configuration = {
                 options: {
                   babelrc: false,
                   cacheDirectory: true,
-                  plugins: ['@babel/plugin-syntax-dynamic-import'],
+                  plugins: [
+                    '@babel/plugin-syntax-dynamic-import',
+                    ['@babel/plugin-proposal-class-properties', { loose: true }]
+                  ],
                   presets: [
                     [
                       '@babel/preset-env',
                       {
                         modules: false,
-                        useBuiltIns: false,
+                        useBuiltIns: false
                       }
                     ],
                     '@babel/preset-react',
@@ -39,20 +43,10 @@ export const common: webpack.Configuration = {
             ]
           },
           {
-            test: files.ts,
-            enforce: 'pre',
-            exclude: /node_modules/,
-            use: [
-              {
-                loader: 'webpack-strip-block'
-              }
-            ]
-          },
-          {
             test: /\.(graphql|gql)$/,
             exclude: /node_modules/,
-            loader: 'graphql-tag/loader',
-          },
+            loader: 'graphql-tag/loader'
+          }
         ]
       }
     ]
@@ -108,6 +102,7 @@ export const common: webpack.Configuration = {
     plugins: [new TsconfigPathsPlugin({ configFile: tsConfig })]
   },
   plugins: [
+    new DotEnv(),
     new WebpackBar({
       name: require(modulePackage).name
     }),

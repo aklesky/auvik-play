@@ -1,6 +1,8 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from './styled';
 
-export default createGlobalStyle`
+export default createGlobalStyle<{
+  theme: any;
+}>`
 body {
   padding: 0;
   margin: 0;

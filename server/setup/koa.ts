@@ -5,7 +5,7 @@ import Koa from 'koa';
 import compress from 'koa-compress';
 import mount from 'koa-mount';
 import serve from 'koa-static';
-import { staticWebpack, withApollo } from 'server/middlewares';
+import { staticWebpack, withApollo, useServerSideRendering } from 'server/middlewares';
 import { logger } from 'server/utils/logger';
 import { router } from './router';
 
@@ -43,7 +43,7 @@ export const appWithWebpackMiddleware = async middleware => {
 export const appWithServerSideRendering = () => {
   const { app, apollo } = createServer();
 
-  router.get('/', () => ({}));
+  router.get('/', useServerSideRendering);
 
   app.use(router.routes());
   app.use(compress());
