@@ -43,6 +43,7 @@
     "@types/webpack-node-externals": "^1.6.3",
     "@types/webpackbar": "^2.6.0",
     "@types/workbox-webpack-plugin": "^4.1.0",
+    "apollo-server-testing": "2.4.8",
     "babel-loader": "^8.0.5",
     "brotli-webpack-plugin": "^1.1.0",
     "chai": "4.2.0",

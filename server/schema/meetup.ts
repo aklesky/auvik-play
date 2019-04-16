@@ -10,7 +10,7 @@ export const meetup = gql`
     mtime: Int
     response: String
     guests: Int
-    visibility: string
+    visibility: String
     venue: Venue
     event: Event
     group: Group

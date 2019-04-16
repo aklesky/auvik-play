@@ -1,5 +1,5 @@
-import { EventsResolvers } from './events';
+import { MeetupResolvers } from './meetup';
 
 export const Resolvers = [
-  EventsResolvers,
+  MeetupResolvers,
 ];

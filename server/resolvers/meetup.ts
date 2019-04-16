@@ -4,19 +4,19 @@ const pubsub = new PubSub();
 
 
 
-export const EventsResolvers = {
+export const MeetupResolvers = {
   AppQuery: {
-    getEvents: () => {
+    Meetups: () => {
       setInterval(() => {
-        pubsub.publish(Messages.push, {  Events: {event_id: new Date().getTime()} });
+        pubsub.publish(Messages.push, {  Meetups: {rsvp_id: new Date().getTime()} });
       }, 10000);
       return {
-        event_id: new Date().getTime(),
+        rsvp_id: new Date().getTime(),
       };
     }
   },
   AppSubscription: {
-    Events: {
+    Meetups: {
       subscribe: () => {
         return pubsub.asyncIterator([Messages.push]);
       }
