@@ -28,12 +28,12 @@ describe('Meetup Stream Suite', () => {
     getMeetupClient.should.be.a('function');
   });
   it('getMeetupClient should be a singleton', () => {
-    getMeetupClient().should.be.equal(client);
+    getMeetupClient()(() => {}).should.be.equal(client(() => {}));
   });
 
   it('initMeetupConnection should have an error of invalid url', () => {
-    const meetup = initMeetupConnection()();
-    meetup.should.be.eqls('Invalid URL: undefined');
+    const meetup = initMeetupConnection();
+    meetup.should.contain('Invalid URL: undefined');
   });
 
   it('initMeetupConnection should connect to the stream', () => {

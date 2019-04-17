@@ -5,6 +5,7 @@ import { Resolvers } from 'server/resolvers';
 import { Schema, Types } from 'server/schema';
 import { logger } from 'server/utils/logger';
 import { onReceive } from 'server/data/subscription';
+import { getMeetupClient } from 'server/data/meetup';
 
 const schema = makeExecutableSchema({
   typeDefs: [...Schema, ...Types],
@@ -23,6 +24,9 @@ export const withApollo = () => (app: Koa) => {
       },
 
       onDisconnect: () => {
+        getMeetupClient(false)(ws => {
+          ws.target.terminate();
+        })
         logger.info('Disconnected from graphql subscriptions');
       }
     }

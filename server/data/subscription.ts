@@ -3,6 +3,7 @@ import Websocket from 'ws';
 import { Messages } from '@/utils/enums';
 import { StreamRequest } from '@/utils/enums';
 import { logger } from 'server/utils/logger';
+import { getMeetupClient } from './meetup';
 export let pubsub = new PubSub();
 
 
@@ -15,9 +16,14 @@ export const onPush = (ws: { data: Websocket.Data; type: string; target: Websock
 export const onReceive = (ws: { data: Websocket.Data; type: string; target: Websocket }) => {
   const message = JSON.parse(ws.data.toString());
   if (message.type === StreamRequest.start) {
+
     logger.info('Request to start streaming Meetups');
+    getMeetupClient()(onPush);
   }
   if (message.type === StreamRequest.stop) {
     logger.info('Request to stop streaming Meetups');
+    getMeetupClient()(ws => {
+      ws.target.close();
+    })
   }
 };

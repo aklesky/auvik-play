@@ -4,9 +4,7 @@ import ws from 'ws';
 
 let client = null;
 
-export const initMeetupConnection = (url?: string, _since?: number) => (
-  callback?: (event: { data: ws.Data; type: string; target: ws }) => void
-): ws => {
+export const initMeetupConnection = (url?: string, _since?: number): ws => {
   try {
     const fromDate = new Date();
     fromDate.setDate(fromDate.getDate() - 1);
@@ -20,11 +18,8 @@ export const initMeetupConnection = (url?: string, _since?: number) => (
 
     meetup.onclose = state => {
       logger.info(`Connection close state: code: ${state.code}, was clean: ${state.wasClean}`);
+      client = null;
     };
-
-    if (typeof callback !== 'undefined') {
-      meetup.onmessage = callback;
-    }
     return meetup;
   } catch (e) {
     logger.error(e.message);
@@ -32,9 +27,14 @@ export const initMeetupConnection = (url?: string, _since?: number) => (
   }
 };
 
-export const getMeetupClient = () => {
-  if (!client) {
+export const getMeetupClient = (initConnection = true) => (
+  callback?: (event: { data: ws.Data; type: string; target: ws }) => void
+): ws => {
+  if (!client && initConnection) {
     client = initMeetupConnection(meetupUri);
+  }
+  if (client && callback) {
+    client.onmessage = callback;
   }
   return client;
 };
