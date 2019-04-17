@@ -1,6 +1,6 @@
 export interface IVenue {
   venue_name: string;
-  lon: number;
-  lat: number;
+  lon: string;
+  lat: string;
   venue_id: number;
 }

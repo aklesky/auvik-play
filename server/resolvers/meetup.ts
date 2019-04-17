@@ -1,4 +1,4 @@
-import { Messages } from '@/utils/enums';
+import { Channels } from '@/utils/enums';
 import { pubsub } from 'server/data/subscription';
 
 export const MeetupResolvers = {
@@ -12,7 +12,7 @@ export const MeetupResolvers = {
   AppSubscription: {
     Meetups: {
       subscribe: (_: any, { channel }) => {
-        return pubsub.asyncIterator([channel || Messages.push]);
+        return pubsub.asyncIterator([channel || Channels.Meetups]);
       }
     }
   }

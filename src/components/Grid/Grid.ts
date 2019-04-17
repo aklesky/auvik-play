@@ -1,4 +1,4 @@
-import { IGeneric } from '@/interfaces';
+import { IGeneric } from '@/interfaces/IGenericComponent';
 import styled from '@/theme/styled';
 
 export const Grid = styled.section<IGeneric>`

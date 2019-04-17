@@ -1,4 +1,4 @@
-import { IGeneric } from '@/interfaces';
+import { IGeneric } from '@/interfaces/IGenericComponent';
 import { flexbox } from '@/theme/flexbox';
 import styled from '@/theme/styled';
 

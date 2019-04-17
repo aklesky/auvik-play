@@ -10,4 +10,11 @@ export interface ITheme {
       lg: number;
     };
   };
+  metrics: {
+    padding: number;
+    margin: number;
+    marginVertical: number;
+    paddingVertical: number;
+    paddingHorizontal: number;
+  };
 }

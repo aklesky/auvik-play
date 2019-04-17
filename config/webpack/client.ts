@@ -157,7 +157,7 @@ const production: webpack.Configuration = {
   },
   output: {
     chunkFilename: 'assets/js/[name].[chunkhash].js',
-    filename: 'assets/js/[name].[chunkhash].js'
+    filename: 'assets/js/[name].[hash].js'
   },
   plugins: [
     new CompressionPlugin({

@@ -6,7 +6,7 @@ import { ApolloProvider } from 'react-apollo';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Route, Switch } from 'react-router';
 import { ThemeProvider } from 'styled-components';
-import { Main } from './containers/main';
+import { Meetups } from './containers/meetups';
 import { withIntlProvider } from './hoc/i18n';
 import { ITheme } from './interfaces/ITheme';
 
@@ -28,7 +28,7 @@ const App: React.SFC<{
           <GlobalStyles />
           <ApolloProvider client={client}>
             <Switch>
-              <Route exact={true} path='/' component={Main} />
+              <Route exact={true} path='/' component={Meetups} />
             </Switch>
           </ApolloProvider>
         </main>

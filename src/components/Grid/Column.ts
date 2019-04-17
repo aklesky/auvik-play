@@ -1,4 +1,4 @@
-import { IGeneric } from '@/interfaces';
+import { IGeneric } from '@/interfaces/IGenericComponent';
 import { responsive } from '@/theme/responsive';
 import styled from '@/theme/styled';
 
