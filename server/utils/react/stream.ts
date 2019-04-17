@@ -1,5 +1,5 @@
 import { ServerStyleSheet } from '@/theme/styled';
-import { client } from '@/utils/apollo';
+import { apolloClient } from '@/utils/apollo';
 import co from 'co';
 import { html } from 'config';
 import fs from 'fs';
@@ -33,7 +33,7 @@ class View extends Readable {
     const sheet = new ServerStyleSheet();
     const { staticApp } = require('@/entries/server');
 
-    const apollo = client(process.browser);
+    const apollo = apolloClient(process.browser);
     const app = staticApp(apollo, this.context.url);
 
     const jsx = sheet.collectStyles(app);

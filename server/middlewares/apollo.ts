@@ -4,6 +4,7 @@ import Koa from 'koa';
 import { Resolvers } from 'server/resolvers';
 import { Schema, Types } from 'server/schema';
 import { logger } from 'server/utils/logger';
+import { onReceive } from 'server/data/subscription';
 
 const schema = makeExecutableSchema({
   typeDefs: [...Schema, ...Types],
@@ -16,8 +17,9 @@ export const withApollo = () => (app: Koa) => {
     playground: !isProduction,
     introspection: !isProduction,
     subscriptions: {
-      onConnect: () => {
+      onConnect: (_, ws) => {
         logger.info('Connected to graphql subscriptions');
+        ws.onmessage = onReceive
       },
 
       onDisconnect: () => {

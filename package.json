@@ -7,8 +7,8 @@
     "start": "node dist/server/server.js",
     "lint": "tslint --project tsconfig.lint.json",
     "dev": "nodemon --verbose -r tsconfig-paths/register ./server/index.ts",
-    "test": "TS_NODE_PROJECT='tsconfig.test.json' mocha server/**/*.spec.ts src/**/*.spec.ts",
-    "test:watch": "TS_NODE_PROJECT='tsconfig.test.json' mocha --watch server/**/*.spec.ts src/**/*.spec.ts"
+    "test": "TS_NODE_PROJECT='tsconfig.test.json' TS_NODE_FILES=true mocha server/**/*.spec.ts src/**/*.spec.ts",
+    "test:watch": "TS_NODE_PROJECT='tsconfig.test.json' TS_NODE_FILES=true mocha --watch server/**/*.spec.ts src/**/*.spec.ts"
   },
   "main": "dist/server/server.js",
   "author": {
@@ -30,6 +30,7 @@
     "@types/copy-webpack-plugin": "^4.4.4",
     "@types/critters-webpack-plugin": "^2.0.0",
     "@types/dotenv": "^6.1.1",
+    "@types/dotenv-webpack": "1.7.0",
     "@types/html-webpack-plugin": "^3.2.0",
     "@types/koa": "^2.0.48",
     "@types/koa-compress": "^2.0.9",

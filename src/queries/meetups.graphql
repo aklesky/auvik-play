@@ -1,0 +1,6 @@
+subscription getMeetups($channel: String) {
+  Meetups(channel: $channel) {
+    rsvp_id
+    mtime
+  }
+}

@@ -8,7 +8,9 @@ export const initMeetupConnection = (url?: string, _since?: number) => (
   callback?: (event: { data: ws.Data; type: string; target: ws }) => void
 ): ws => {
   try {
-    const meetup = new ws(url);
+    const fromDate = new Date();
+    fromDate.setDate(fromDate.getDate() - 1);
+    const meetup = new ws(`${url}?since_mtime=${fromDate.getTime()}`);
     meetup.onopen = () => {
       logger.info('Connection to Stream is established');
     };

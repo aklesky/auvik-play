@@ -928,6 +928,13 @@
   dependencies:
     "@types/webpack" "*"
 
+"@types/dotenv-webpack@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@types/dotenv-webpack/-/dotenv-webpack-1.7.0.tgz#48eb5a430737e7321f169bfec6c93a3ac566c094"
+  integrity sha512-/dXQdLSma6nYkeTiO571+IUEPY0hs3uwJfsLVvj4v/6/CqBUm/4TNiGHpqveIllQ0M0YVB67sdl9Fmgr2riBRQ==
+  dependencies:
+    "@types/webpack" "*"
+
 "@types/dotenv@^6.1.1":
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-6.1.1.tgz#f7ce1cc4fe34f0a4373ba99fefa437b0bec54b46"

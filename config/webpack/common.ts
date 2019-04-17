@@ -2,6 +2,7 @@ import { isProduction } from 'config/env';
 import { files } from 'config/files';
 import { modulePackage, node_modules, publicPath, root, tsConfig } from 'config/paths';
 import DotEnv from 'dotenv-webpack';
+import { resolve } from 'path';
 import TerserPlugin from 'terser-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import webpack from 'webpack';
@@ -102,7 +103,9 @@ export const common: webpack.Configuration = {
     plugins: [new TsconfigPathsPlugin({ configFile: tsConfig })]
   },
   plugins: [
-    new DotEnv(),
+    new DotEnv({
+      path: resolve(root, '.env')
+    }),
     new WebpackBar({
       name: require(modulePackage).name
     }),

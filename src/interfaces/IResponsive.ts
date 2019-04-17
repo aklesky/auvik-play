@@ -1,3 +1,4 @@
 export interface IResponsive {
-  size: number;
+  size?: number;
+  fullHeight?: boolean;
 }

@@ -1,4 +1,5 @@
-import { Messages, pubsub } from 'server/data/subscription';
+import { Messages } from '@/utils/enums';
+import { pubsub } from 'server/data/subscription';
 
 export const MeetupResolvers = {
   AppQuery: {
@@ -10,9 +11,9 @@ export const MeetupResolvers = {
   },
   AppSubscription: {
     Meetups: {
-      subscribe: (_, { channel }) => {
+      subscribe: (_: any, { channel }) => {
         return pubsub.asyncIterator([channel || Messages.push]);
-      },
+      }
     }
   }
 };
