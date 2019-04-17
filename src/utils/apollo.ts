@@ -34,10 +34,9 @@ export const getWebsocketClient = (uri?: string, isBrowser?: boolean) => {
 };
 
 export const getSubscriptionClient = () => {
-  const {subscriptionClient } = getWebsocketClient();
+  const { subscriptionClient } = getWebsocketClient();
   return subscriptionClient;
-
-}
+};
 
 export const apolloClient = (isBrowser = true, url?: string) => {
   const uri = url || process.env.APOLLO || null;
