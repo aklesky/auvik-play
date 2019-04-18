@@ -2,6 +2,7 @@ subscription getMeetups($channel: String) {
   Meetups(channel: $channel) {
     rsvp_id
     mtime
+    response
     venue {
       venue_name
       lon
@@ -12,6 +13,9 @@ subscription getMeetups($channel: String) {
       event_name
       time
       friendly_date
+    }
+    group {
+      group_country
     }
   }
 }

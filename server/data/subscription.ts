@@ -10,17 +10,19 @@ export let pubsub = new PubSub();
 export const onPushMeetups = (ws: { data: Websocket.Data; type: string; target: Websocket }) => {
   try {
     const data = JSON.parse(ws.data.toString()) as IMeetup;
-    pubsub.publish(Channels.Meetups, {
-      Meetups: {
-        ...data,
-        event: {
-          ...data.event,
-          friendly_date: data.event.time
-            ? localizedDate(parseInt(data.event.time.toString(), 0))
-            : null
+    if (data.response !== 'yes' && data.group.group_country !== 'us') {
+      pubsub.publish(Channels.Meetups, {
+        Meetups: {
+          ...data,
+          event: {
+            ...data.event,
+            friendly_date: data.event.time
+              ? localizedDate(parseInt(data.event.time.toString(), 0))
+              : null
+          }
         }
-      }
-    });
+      });
+    }
   } catch (e) {
     logger.error(e.message);
     SubscriptionLog(new Date().getTime(), e.message);
