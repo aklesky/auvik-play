@@ -1,12 +1,12 @@
 import GlobalStyles from '@/theme/globalStyle';
 import { helmetContext } from '@/utils/helmet';
+import loadable from '@loadable/component';
 import { ApolloClient } from 'apollo-client';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Route, Switch } from 'react-router';
 import { ThemeProvider } from 'styled-components';
-import { Meetups } from './containers/meetups';
 import { withIntlProvider } from './hoc/i18n';
 import { ITheme } from './interfaces/ITheme';
 
@@ -28,7 +28,11 @@ const App: React.SFC<{
           <GlobalStyles />
           <ApolloProvider client={client}>
             <Switch>
-              <Route exact={true} path='/' component={Meetups} />
+              <Route
+                exact={true}
+                path='/'
+                component={loadable(() => import('@/containers/meetups'))}
+              />
             </Switch>
           </ApolloProvider>
         </main>

@@ -50,3 +50,5 @@ const Component = props => {
 };
 
 export const Meetups = withAppIntl(Component);
+
+export default Meetups;
