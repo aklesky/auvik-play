@@ -43,3 +43,5 @@ export const workBoxConfig = join(
   isProduction ? 'sw-core.production.js' : 'sw-core.dev.js'
 );
 export const swCore = join(js, 'sw-core.js');
+
+export const stats = join(client, 'loadable-stats.json');
