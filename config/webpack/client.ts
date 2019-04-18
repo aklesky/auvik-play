@@ -22,6 +22,7 @@ import en from 'i18n/en.json';
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin';
 import webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import LoadablePlugin from '@loadable/webpack-plugin';
 import merge from 'webpack-merge';
 import { common } from './common';
 import { progressive } from './progressive';
@@ -79,7 +80,7 @@ const base: webpack.Configuration = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: 'body',
+      inject: !isProduction ? 'body' : false,
       title: en.name,
       description: en.description,
       template,
@@ -127,7 +128,8 @@ const base: webpack.Configuration = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.APOLLO': JSON.stringify(`//${hostname}:${port}/graphql`)
     }),
-    new webpack.HashedModuleIdsPlugin()
+    new webpack.HashedModuleIdsPlugin(),
+    new LoadablePlugin(),
   ]
 };
 
