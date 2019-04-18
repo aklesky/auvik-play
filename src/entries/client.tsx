@@ -1,6 +1,6 @@
 import { Universal } from '@/app';
 import { theme } from '@/theme';
-import { client } from '@/utils/apollo';
+import { apolloClient } from '@/utils/apollo';
 import fonts from '@/utils/fonts';
 import sw from '@/utils/sw';
 import { ApolloClient } from 'apollo-client';
@@ -25,10 +25,10 @@ const renderApp = (apollo: ApolloClient<any>) => {
   }
 };
 
-renderApp(client(process.browser));
+renderApp(apolloClient(process.browser));
 
 if (module.hot) {
   module.hot.accept('@/app', () => {
-    renderApp(client(process.browser));
+    renderApp(apolloClient(process.browser));
   });
 }

@@ -2,5 +2,12 @@
   "name": "@auvik-dashboard",
   "description": "Aleksei Semiglasov @auvik-dashboardd",
   "short_name": "@dashboard",
-  "banner": "Aleksei Semiglasov <aleksey.semiglasov@gmail.com>"
+  "banner": "Aleksei Semiglasov <aleksey.semiglasov@gmail.com>",
+  "start": "Start",
+  "pause": "Pause",
+  "dashboard": "Meetups Events",
+  "event": "Event",
+  "date": "Date",
+  "logs": "Logs Console",
+  "last": "Last Entry:"
 }

@@ -7,5 +7,8 @@ export const colors = {
   red: '#f44336',
   gray: 'rgb(123, 123, 123)',
   gray100: '#9E9E9E',
-  black: 'rgb(0, 0, 0)'
+  gray200: '#607d8b',
+  black: 'rgb(0, 0, 0)',
+  lightgray: 'rgba(226, 226, 226, .39)',
+  green: '#4caf50',
 };

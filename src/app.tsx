@@ -1,32 +1,34 @@
 import GlobalStyles from '@/theme/globalStyle';
 import { helmetContext } from '@/utils/helmet';
 import { ApolloClient } from 'apollo-client';
-import { description, name } from 'i18n/en.json';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Route, Switch } from 'react-router';
 import { ThemeProvider } from 'styled-components';
+import { Meetups } from './containers/meetups';
+import { withIntlProvider } from './hoc/i18n';
 import { ITheme } from './interfaces/ITheme';
 
-export const Universal: React.SFC<{
+const App: React.SFC<{
   theme: ITheme;
   client: ApolloClient<any>;
+  i18n: any;
 }> = props => {
-  const { theme, client } = props;
+  const { theme, client, i18n } = props;
   return (
     <HelmetProvider context={helmetContext}>
       <Helmet>
         <meta charSet='utf-8' />
-        <title>{name}</title>
-        <meta name='description' content={description} />
+        <title>{i18n.name}</title>
+        <meta name='description' content={i18n.description} />
       </Helmet>
       <ThemeProvider theme={theme}>
         <main className='test'>
           <GlobalStyles />
           <ApolloProvider client={client}>
             <Switch>
-              <Route exact={true} path='/' component={() => <div>Initial Setup</div>} />
+              <Route exact={true} path='/' component={Meetups} />
             </Switch>
           </ApolloProvider>
         </main>
@@ -34,3 +36,5 @@ export const Universal: React.SFC<{
     </HelmetProvider>
   );
 };
+
+export const Universal = withIntlProvider(App);

@@ -1,20 +1,13 @@
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { apolloClient } from '@/utils/apollo';
 import ApolloClient from 'apollo-client';
-import { split } from 'apollo-link';
-import { HttpLink } from 'apollo-link-http';
-import { WebSocketLink } from 'apollo-link-ws';
 import { ApolloServerBase } from 'apollo-server-core';
 import { gql } from 'apollo-server-koa';
 import { createTestClient } from 'apollo-server-testing';
-import { getMainDefinition } from 'apollo-utilities';
 import { should } from 'chai';
-import { hostname, port } from 'config/env';
 import fetch from 'isomorphic-unfetch';
 import { pubsub } from 'server/data/subscription';
 import { createServer } from 'server/setup/koa';
 import { logger } from 'server/utils/logger';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
-import ws from 'ws';
 
 if (!process.browser) {
   global.fetch = fetch;
@@ -25,45 +18,17 @@ describe('Apollo Server Suite', () => {
   let server = null;
   let instance: ApolloServerBase = null;
   let client: ApolloClient<any> = null;
-  let subscriptionClient = null;
-  let defaultClient = null;
-  let link = null;
 
   before(() => {
     const { app, apollo } = createServer();
-    server = app.listen(port, () => {
-      logger.info(`server is runninng on ${port}`);
+    server = app.listen('3002', () => {
+      logger.info(`server is runninng on 3002`);
     });
 
     apollo.installSubscriptionHandlers(server);
     instance = apollo;
-    subscriptionClient = new WebSocketLink(
-      new SubscriptionClient(
-        `ws://${hostname}:${port}/graphql`,
-        {
-          reconnect: true
-        },
-        ws
-      )
-    );
 
-    defaultClient = new HttpLink({
-      uri: `http://${hostname}:${port}/graphql`
-    });
-
-    link = split(
-      ({ query }) => {
-        const { kind, operation } = getMainDefinition(query);
-        return kind === 'OperationDefinition' && operation === 'subscription';
-      },
-      subscriptionClient,
-      defaultClient
-    );
-
-    client = new ApolloClient({
-      link,
-      cache: new InMemoryCache()
-    });
+    client = apolloClient(false, `127.0.0.1:3002/graphql`);
   });
   after(() => {
     server.close();

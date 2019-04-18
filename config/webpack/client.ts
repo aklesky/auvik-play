@@ -3,7 +3,7 @@ import BrotliCompression from 'brotli-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import { bundle } from 'config/bundle';
-import { isProduction } from 'config/env';
+import { hostname, isProduction, port } from 'config/env';
 import { files } from 'config/files';
 import {
   assets,
@@ -124,7 +124,8 @@ const base: webpack.Configuration = {
       }
     ]),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.APOLLO': JSON.stringify(`//${hostname}:${port}/graphql`)
     }),
     new webpack.HashedModuleIdsPlugin()
   ]
@@ -156,7 +157,7 @@ const production: webpack.Configuration = {
   },
   output: {
     chunkFilename: 'assets/js/[name].[chunkhash].js',
-    filename: 'assets/js/[name].[chunkhash].js'
+    filename: 'assets/js/[name].[hash].js'
   },
   plugins: [
     new CompressionPlugin({

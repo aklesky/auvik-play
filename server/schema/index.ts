@@ -1,4 +1,5 @@
 import { gql } from 'apollo-server-koa';
+import { LogTopic } from './log';
 import meetup from './meetup';
 
 const queries = gql`
@@ -8,6 +9,7 @@ const queries = gql`
 
   type AppSubscription {
     Meetups(channel: String): Meetup
+    Logs: Log
   }
 `;
 
@@ -20,4 +22,4 @@ const schema = gql`
 
 export const Schema = [schema, queries];
 
-export const Types = [meetup];
+export const Types = [meetup, LogTopic];

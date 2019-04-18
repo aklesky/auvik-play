@@ -1,9 +1,13 @@
-import { IResponsive } from '@/interfaces/IResponsive';
+import { IResponsive, ITheme } from '@/interfaces';
 import { css } from './styled';
 
-export const responsive = css<IResponsive>`
+export const responsive = css`
   width: 100%;
-  ${props =>
+  ${(
+    props: IResponsive & {
+      theme: ITheme;
+    }
+  ) =>
     Object.keys(props)
       .filter(def => props.theme.grid.breakpoints[def])
       .sort((a, b) => props.theme.grid.breakpoints[a] - props.theme.grid.breakpoints[b])

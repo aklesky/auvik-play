@@ -1,5 +1,5 @@
 import { ServerStyleSheet } from '@/theme/styled';
-import { client } from '@/utils/apollo';
+import { apolloClient } from '@/utils/apollo';
 import co from 'co';
 import { html } from 'config';
 import fs from 'fs';
@@ -26,6 +26,7 @@ class View extends Readable {
   public _read() {}
 
   public *render() {
+    try {
     this.push('<!DOCTYPE html><html lang="en">');
     const data = fs.readFileSync(html, 'utf8');
     const [head, footer] = data.split('<!-- AppRoot -->');
@@ -33,7 +34,7 @@ class View extends Readable {
     const sheet = new ServerStyleSheet();
     const { staticApp } = require('@/entries/server');
 
-    const apollo = client(process.browser);
+    const apollo = apolloClient(false);
     const app = staticApp(apollo, this.context.url);
 
     const jsx = sheet.collectStyles(app);
@@ -51,6 +52,8 @@ class View extends Readable {
             '\\u003c'
           )};</script>`
         );
+      }).catch(e => {
+        logger.error(e.message);
       });
 
     const stream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx));
@@ -64,6 +67,9 @@ class View extends Readable {
       this.push('</html>');
       this.push(null);
     });
+    } catch (e) {
+      logger.error(e.message);
+    }
   }
 }
 

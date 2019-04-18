@@ -6,9 +6,9 @@ import { venue } from './venue';
 export const meetup = gql`
   type Meetup {
     rsvp_id: ID!
-    mtime: Int
+    mtime: String
     response: String
-    guests: Int
+    guests: String
     visibility: String
     venue: Venue
     event: Event

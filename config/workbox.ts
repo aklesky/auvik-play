@@ -7,6 +7,8 @@ export const workboxBundle = {
     /.hot-update.json$/,
     /.hot-update.js$/,
     /manifest.(.*).json$/i,
+    /maps\./i,
+    /^https:\/\/maps\./
   ],
 };
 

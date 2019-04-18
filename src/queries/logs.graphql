@@ -1,0 +1,6 @@
+subscription {
+  Logs {
+    time
+    message
+  }
+}

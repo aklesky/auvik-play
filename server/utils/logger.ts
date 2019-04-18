@@ -1,7 +1,10 @@
+import { localizedDate } from '@/utils/date';
+import { Channels } from '@/utils/enums';
 import { isProduction } from 'config/env';
 import { log, logs } from 'config/paths';
 import fs from 'fs';
 import { TransformableInfo } from 'logform';
+import { pubsub } from 'server/data/subscription';
 import { createLogger, format, transports } from 'winston';
 
 if (!fs.existsSync(logs)) {
@@ -36,3 +39,15 @@ if (!isProduction) {
     })
   );
 }
+
+export const SubscriptionLog = (time: number, message: string) => {
+  if (!pubsub) {
+    return null;
+  }
+  pubsub.publish(Channels.Logs, {
+    Logs: {
+      time: localizedDate(time),
+      message
+    }
+  });
+};
