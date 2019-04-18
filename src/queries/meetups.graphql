@@ -11,6 +11,7 @@ subscription getMeetups($channel: String) {
     event {
       event_name
       time
+      friendly_date
     }
   }
 }

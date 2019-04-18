@@ -5,6 +5,7 @@ export const event = gql`
     event_name: String
     event_id: ID!
     time: String
+    friendly_date: String
     event_url: String
   }
 `;

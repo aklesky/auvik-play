@@ -5,7 +5,9 @@
   "banner": "Aleksei Semiglasov <aleksey.semiglasov@gmail.com>",
   "start": "Start",
   "pause": "Pause",
-  "dashboard": "Meetups Dashboard",
+  "dashboard": "Meetups Events",
   "event": "Event",
-  "date": "Date"
+  "date": "Date",
+  "logs": "Logs Console",
+  "last": "Last Entry:"
 }

@@ -11,10 +11,12 @@ const Container = props => {
   if (Meetups.venue === null) {
     return null;
   }
+
+  if (props.subscribeOnly) {
+    return null;
+  }
   return (
     <Marker
-      label={{ text: Meetups.event.event_name }}
-      title={Meetups.event.event_name}
       position={{
         lat: parseInt(Meetups.venue.lat, 0),
         lng: parseInt(Meetups.venue.lon, 0)

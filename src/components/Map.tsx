@@ -1,12 +1,12 @@
+import styled from '@/theme/styled';
 import React from 'react';
 import { GoogleMap, withGoogleMap, withScriptjs } from 'react-google-maps';
 import { compose, withProps } from 'recompose';
 
 export const GoogleMapComponent = compose(
   withProps({
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${
-      process.env.GOOGLE_MAP_KEY || null
-    }&v=3.exp`,
+    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_KEY ||
+      null}&v=3.exp`,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `300px` }} />,
     mapElement: <div style={{ height: `100%` }} />
@@ -18,3 +18,14 @@ export const GoogleMapComponent = compose(
     {props.children}
   </GoogleMap>
 ));
+
+const Component = props => (
+  <div className={props.className}>
+    <GoogleMapComponent>{props.children}</GoogleMapComponent>
+  </div>
+);
+
+export const Map = styled(Component)`
+  margin-left: ${props => props.theme.metrics.margin}px;
+  margin-right: ${props => props.theme.metrics.margin}px;
+`;

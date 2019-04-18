@@ -3,20 +3,19 @@ import styled from '@/theme/styled';
 
 export const Table = styled.table<IGeneric>`
   display: flex;
-
   border-collapse: collapse;
-  width: calc(100% - 10px);
   flex-direction: column;
-  margin: 0 auto;
+  margin-left: ${props => props.theme.metrics.margin}px;
+  margin-right: ${props => props.theme.metrics.margin}px;
 `;
 export const TBody = styled.tbody<IGeneric>`
   width: 100%;
-  height: 350px;
+  height: ${props => props.theme.metrics.tbody}px;
   overflow-y: scroll;
   display:block;
 `;
 export const THead = styled.thead<IGeneric>`
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: ${props => props.theme.metrics.marginVertical}px;
+  margin-bottom: ${props => props.theme.metrics.marginVertical}px;
 `;

@@ -15,6 +15,7 @@ export enum EventTypes {
 
 export enum ActionTypes {
   ADD_MEETUPS = 'ADD_MEETUP_LOG',
+  ADD_LOGS = 'ADD_CONSOLE_LOG',
   START_RECEIVING = 'START RECEIVING',
   STOP_RECEIVING = 'STOP RECEIVING',
 }

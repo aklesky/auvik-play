@@ -5,7 +5,7 @@ import { getMeetupClient } from 'server/data/meetup';
 import { onReceive } from 'server/data/subscription';
 import { Resolvers } from 'server/resolvers';
 import { Schema, Types } from 'server/schema';
-import { logger } from 'server/utils/logger';
+import { logger, SubscriptionLog } from 'server/utils/logger';
 
 const schema = makeExecutableSchema({
   typeDefs: [...Schema, ...Types],
@@ -19,7 +19,9 @@ export const withApollo = () => (app: Koa) => {
     introspection: !isProduction,
     subscriptions: {
       onConnect: (_, ws) => {
-        logger.info('Connected to graphql subscriptions');
+        const message = 'Connected to graphql subscriptions';
+        logger.info(message);
+        SubscriptionLog(new Date().getTime(), message);
         ws.onmessage = onReceive;
       },
 
@@ -27,7 +29,9 @@ export const withApollo = () => (app: Koa) => {
         getMeetupClient(false)(ws => {
           ws.target.terminate();
         });
-        logger.info('Disconnected from graphql subscriptions');
+        const message = 'Disconnected from graphql subscriptions';
+        logger.info(message);
+        SubscriptionLog(new Date().getTime(), message);
       }
     }
   });

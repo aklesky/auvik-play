@@ -1,19 +1,29 @@
 import { IGeneric } from '@/interfaces/IGenericComponent';
 import { elevation } from '@/theme/elevation';
+import { flexbox } from '@/theme/flexbox';
 import styled from '@/theme/styled';
 import { transform } from '@/theme/transform';
 
 export const Button = styled.button<IGeneric>`
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  border: none;
-  white-space: nowrap;
+  ${flexbox}
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: ${props => props.theme.colors.background};
+  color: ${props => props.theme.colors.white};
+  padding: ${props => props.theme.metrics.padding}px;
+  margin-top: ${props => props.theme.metrics.margin}px;
+  margin-bottom: ${props => props.theme.metrics.margin}px;
   cursor: pointer;
-  box-sizing: border-box;
-  outline: 0;
-  &:hover {
-    ${transform}
+  width: calc(100% - ${props => props.theme.metrics.margin}px);
+  ${elevation};
+  color: ${props => props.theme.colors.white};
+  &:visited,
+  &:hover,
+  &:visited {
+    color: ${props => props.theme.colors.white};
   }
-  ${elevation}
+  &:hover {
+    ${transform};
+  }
 `;

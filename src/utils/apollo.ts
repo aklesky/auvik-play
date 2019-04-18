@@ -5,7 +5,6 @@ import { createHttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import fetch from 'isomorphic-unfetch';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
-import ws from 'ws';
 
 if (!process.browser) {
   global.fetch = fetch;
@@ -26,7 +25,7 @@ export const getWebsocketClient = (uri?: string, isBrowser?: boolean) => {
         {
           reconnect: true
         },
-        !isBrowser ? ws : null
+        !isBrowser ? require('ws') : null
       )
     );
   }

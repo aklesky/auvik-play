@@ -19,5 +19,6 @@ export const theme: ITheme = {
     marginVertical: 15,
     paddingVertical: 10,
     paddingHorizontal: 10,
+    tbody: 450,
   }
 };

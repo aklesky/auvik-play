@@ -1,7 +1,7 @@
 import React from 'react';
 import Subscription from 'react-apollo/Subscriptions';
 
-export const withSubscription = (query, variables) => Component => props => {
+export const withSubscription = (query, variables?: any) => Component => props => {
   return (
     <Subscription
       onSubscriptionData={props.onDataReceive}
@@ -12,7 +12,7 @@ export const withSubscription = (query, variables) => Component => props => {
     >
       {({ data, loading }) => {
         if (loading) {
-          return '...Loading...';
+          return null;
         }
         return <Component {...data} {...props} />;
       }}
